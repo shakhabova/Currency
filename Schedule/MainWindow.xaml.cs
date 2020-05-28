@@ -20,19 +20,16 @@ namespace Schedule
     /// </summary>
     public partial class MainWindow : Window
     {
-        public List<Currencies> Currencies { get; set; } = new List<Currencies>();
         public MainWindow()
         {
             InitializeComponent();
-            Currencies.Add(new Schedule.Currencies
-            {
-                Code = "USD",
-                Count = 1,
-                Name = "Доллар США",
-                Currency = 73.2056,
-                Changes = -0.7242
-            });
-            Listview.ItemsSource = Currencies;
+            Init();
+        }
+
+        public async void Init()
+        {
+            var parser = new Parser();
+            Listview.ItemsSource = await parser.GetCurrency();
         }
     }
 }
