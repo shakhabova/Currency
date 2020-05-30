@@ -15,7 +15,31 @@
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Count}">Единица</GridViewColumn>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Name}">Валюта</GridViewColumn>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Currency}">Курс</GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Changes}">Изменение</GridViewColumn>
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock x:Name="Txt2" Text="{Binding Path=Changes}">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Path=IsChangePositive}" Value="True">
+                                                    <Setter Property="Foreground" Value="Green"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Path=IsChangePositive}" Value="False">
+                                                    <Setter Property="Foreground" Value="Red"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                               </TextBlock>
+                           </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="Data2">
+                                <TextBlock>Изменения</TextBlock>
+                            </GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>

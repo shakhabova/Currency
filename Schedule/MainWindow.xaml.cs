@@ -26,7 +26,7 @@ namespace Schedule
             Init();
         }
 
-        public async void Init()
+        private async void Init()
         {
             var parser = new Parser();
             Listview.ItemsSource = await parser.GetCurrency();

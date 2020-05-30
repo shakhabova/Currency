@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Media;
 
 namespace Schedule
 {
@@ -11,6 +12,8 @@ namespace Schedule
         public string Name { get; set; }
         public string Currency { get; set; }
         public string Changes { get; set; }
+        public bool IsChangePositive { get; set; }
     }
+   
 }
- 
+    
