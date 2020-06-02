@@ -13,6 +13,7 @@ namespace Schedule
         public string Currency { get; set; }
         public string Changes { get; set; }
         public bool IsChangePositive { get; set; }
+        public bool IsChecked { get; set; }
     }
    
 }

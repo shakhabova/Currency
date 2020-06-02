@@ -8,7 +8,7 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Button Content="Button" HorizontalAlignment="Left" Margin="328,373,0,0" VerticalAlignment="Top"/>
-        <ListView Margin="0,0,0,77" Name="Listview">
+        <ListView Margin="0,0,0,77" Name="Listview" HorizontalAlignment="Left">
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Code}">Код</GridViewColumn>
@@ -43,6 +43,19 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <ListView Margin="0,0,0,77" Name="Listview2" HorizontalAlignment="Right">
+            <ListView.View>
 
+                <GridView>
+                    <GridViewColumn Header="Код" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox Content="{Binding Code}"  IsChecked="{Binding IsChecked}" VerticalContentAlignment="Top"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>

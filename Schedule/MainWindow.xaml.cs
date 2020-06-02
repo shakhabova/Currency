@@ -29,7 +29,9 @@ namespace Schedule
         private async void Init()
         {
             var parser = new Parser();
-            Listview.ItemsSource = await parser.GetCurrency();
+            var curr = await parser.GetCurrency();
+            Listview.ItemsSource = curr;
+            Listview2.ItemsSource = curr;
         }
     }
 }

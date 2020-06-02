@@ -1,4 +1,5 @@
 ﻿using AngleSharp;
+using AngleSharp.Dom;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,12 +23,22 @@ namespace Schedule
             var rows = document.QuerySelectorAll(rowSelector);
 
             // projecting from DOM elements to Currency objects
-           
-            return rows.Select(r => new Currencies 
+            string getName(IElement r){
+                if (r.Children[2].Children.Length > 0)
+                {
+                    return r.Children[2].Children[0].TextContent.Trim();
+                }
+                else
+                {
+                   return r.Children[2].TextContent.Trim();
+                }
+
+            }
+            return rows.Select(r => new Currencies
             {
                 Code = r.Children[0].TextContent.Trim(),
                 Count = r.Children[1].TextContent.Trim(),
-                Name = r.Children[2].Children.Length > 0 ? r.Children[2].Children[0].TextContent.Trim() : r.Children[2].TextContent.Trim(),
+                Name = getName(r),
                 Currency = r.Children[3].TextContent.Trim(),
                 Changes = r.Children[4].TextContent.Trim(),
                 IsChangePositive = r.Children[4].TextContent.Trim().StartsWith('+')
