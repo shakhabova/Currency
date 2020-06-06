@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="328,373,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <Button x:Name="Button" Content="Button" HorizontalAlignment="Left" Margin="328,373,0,0" VerticalAlignment="Top" Click="Button_Click"/>
         <ListView Margin="0,0,0,77" Name="Listview" HorizontalAlignment="Left">
             <ListView.View>
                 <GridView>
@@ -57,5 +57,13 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <Canvas x:Name="canvas2" Height="100" Width="100" Visibility="Collapsed">
+            <Canvas Height="100" Width="100" x:Name="canvas1" RenderTransformOrigin=".5,.5">
+                <Canvas.RenderTransform>
+                    <RotateTransform x:Name="spin" Angle="0"/>
+                </Canvas.RenderTransform>
+            </Canvas>
+            <Label Height="23" Canvas.Left="26" Canvas.Top="36" Width="48">Loading</Label>
+        </Canvas>
     </Grid>
 </Window>

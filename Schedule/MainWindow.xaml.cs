@@ -25,10 +25,15 @@ namespace Schedule
         {
             InitializeComponent();
             Init();
+            drawCanvas();
         }
 
         private async void Init()
         {
+            Button.IsEnabled = false;
+            Listview.Visibility = Visibility.Hidden;
+            Listview2.Visibility = Visibility.Hidden;
+            canvas2.Visibility = Visibility.Visible;
             var parser = new Parser();
             var curr = await parser.GetCurrency();
             curr = curr.Select(s =>
@@ -41,12 +46,42 @@ namespace Schedule
 
             Listview2.ItemsSource = curr;
 
+            canvas2.Visibility = Visibility.Hidden;
+            Listview.Visibility = Visibility.Visible;
+            Listview2.Visibility = Visibility.Visible;
+            Button.IsEnabled = true;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             SelectedCodes = (Listview2.ItemsSource as IEnumerable<Currencies>).Where(p => p.IsChecked).Select(s => s.Code);
             Init();
+        }
+
+        void drawCanvas()
+        {
+            for (int i = 0; i < 12; i++)
+            {
+                Line line = new Line()
+                {
+                    X1 = 50,
+                    X2 = 50,
+                    Y1 = 0,
+                    Y2 = 20,
+                    StrokeThickness = 5,
+                    Stroke = Brushes.Gray,
+                    Width = 100,
+                    Height = 100
+                };
+                line.VerticalAlignment = VerticalAlignment.Center;
+                line.HorizontalAlignment = HorizontalAlignment.Center;
+                line.RenderTransformOrigin = new Point(.5, .5);
+                line.RenderTransform = new RotateTransform(i * 30);
+                line.Opacity = (double)i / 12;
+
+                canvas1.Children.Add(line);
+
+            }
         }
     }
 }
