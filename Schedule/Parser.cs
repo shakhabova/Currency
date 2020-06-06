@@ -23,7 +23,8 @@ namespace Schedule
             var rows = document.QuerySelectorAll(rowSelector);
 
             // projecting from DOM elements to Currency objects
-            string getName(IElement r){
+            string getName(IElement r)
+            {
                 if (r.Children[2].Children.Length > 0)
                 {
                     return r.Children[2].Children[0].TextContent.Trim();

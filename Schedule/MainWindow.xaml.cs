@@ -20,6 +20,7 @@ namespace Schedule
     /// </summary>
     public partial class MainWindow : Window
     {
+        public IEnumerable<string> SelectedCodes { get; set; } = new List<string>();
         public MainWindow()
         {
             InitializeComponent();
@@ -30,8 +31,22 @@ namespace Schedule
         {
             var parser = new Parser();
             var curr = await parser.GetCurrency();
-            Listview.ItemsSource = curr;
+            curr = curr.Select(s =>
+            {
+                s.IsChecked = SelectedCodes.Contains(s.Code);
+                return s;
+            }).ToList();
+
+            Listview.ItemsSource = curr.Where(c => c.IsChecked);
+
             Listview2.ItemsSource = curr;
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            SelectedCodes = (Listview2.ItemsSource as IEnumerable<Currencies>).Where(p => p.IsChecked).Select(s => s.Code);
+            Init();
         }
     }
 }
